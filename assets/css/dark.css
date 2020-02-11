@@ -1,0 +1,20 @@
+body,
+#rStudioHeader,
+#main,
+#navPanel {
+  color: #eeeeee !important;
+  background-color: #252525 !important;
+}
+
+span.actionTitle {
+  color: #eeeeee !important;
+}
+
+span.actionTitle:hover {
+  color: #505050 !important;
+}
+
+.menuSectionTitle.notActive,
+.menuItem:not(:hover) {
+  color: #eeeeee !important;
+}

@@ -1,0 +1,61 @@
+{
+  "name": "rstudio-desktop",
+  "version": "1.0.0",
+  "description": "A dedicated, **unofficial** desktop application for RStudio Cloud.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "sh build.sh"
+  },
+  "keywords": [
+    "RStudio",
+    "LaTex"
+  ],
+  "author": "oitsjustjose",
+  "license": "CC0-1.0",
+  "devDependencies": {
+    "electron": "^4.1.3",
+    "electron-builder": "^20.44.4"
+  },
+  "dependencies": {
+    "electron-context-menu": "^0.12.1",
+    "electron-log": "^3.0.5",
+    "element-ready": "^3.1.0"
+  },
+  "build": {
+    "appId": "com.oitsjustjose.rstudiodesktop",
+    "productName": "RStudio Desktop",
+    "appImage": {
+      "category": "public.app-category.productivity"
+    },
+    "mac": {
+      "category": "public.app-category.productivity",
+      "icon": "assets/icons/macOS/RStudio.icns"
+    },
+    "win": {
+      "icon": "assets/icons/win/RStudio.ico"
+    },
+    "linux": {
+      "icon": "assets/icons/png/RStudio.png"
+    },
+    "deb": {
+      "icon": "assets/icons/png/RStudio.png"
+    },
+    "snap": {},
+    "pacman": {
+      "icon": "assets/icons/png/RStudio.png"
+    },
+    "rpm": {
+      "icon": "assets/icons/png/RStudio.png"
+    },
+    "freebsd": {
+      "icon": "assets/icons/png/RStudio.png"
+    },
+    "p5p": {
+      "icon": "assets/icons/png/RStudio.png"
+    },
+    "apk": {
+      "icon": "assets/icons/png/RStudio.png"
+    }
+  }
+}
