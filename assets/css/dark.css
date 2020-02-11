@@ -1,7 +1,10 @@
 body,
 #rStudioHeader,
 #main,
-#navPanel {
+#navPanel,
+.contentContainer,
+.genMessage,
+.emptyListMessage {
   color: #eeeeee !important;
   background-color: #252525 !important;
 }
@@ -17,4 +20,25 @@ span.actionTitle:hover {
 .menuSectionTitle.notActive,
 .menuItem:not(:hover) {
   color: #eeeeee !important;
+}
+
+#currentUser:hover,
+a.menuItem:hover {
+  color: #505050 !important;
+}
+
+button:hover {
+  color: #eeeeee !important;
+}
+
+form .toggleableInfo,
+.popupMenu.open,
+.modalDialog > .message,
+.modalDialog {
+  color: #eeeeee !important;
+  background-color: rgba(25, 25, 25, 0.9) !important;
+}
+
+#mainCover {
+  background-color: rgba(255, 255, 255, 0.05) !important;
 }
