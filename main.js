@@ -1,6 +1,7 @@
 const electron = require('electron');
 const path = require('path');
 const shell = require('electron').shell;
+const dialog = require('electron').dialog;
 const app = electron.app;
 const Menu = electron.Menu;
 const BrowserWindow = electron.BrowserWindow;
@@ -32,7 +33,6 @@ const createWindow = () => {
         webPreferences: {
             nodeIntegration: false,
             nativeWindowOpen: true,
-            preload: path.join(__dirname, 'preload')
         },
         transparent: process.platform == "darwin"
     });
@@ -43,14 +43,21 @@ const createWindow = () => {
         addCustomCSS(mainWindow);
     });
 
-    mainWindow.webContents.on('new-window', (e, url) => {
-        e.preventDefault();
+    mainWindow.webContents.on('new-window', (e, url, frameName, disposition, options) => {
         if (url.indexOf("https://rstudio.cloud/") != -1) {
+            e.preventDefault();
             mainWindow.loadURL(url);
             addCustomCSS(mainWindow);
             mainWindow.webContents.session.flushStorageData();
-        } else {
+        } else if (url.indexOf("rstudio.cloud") == -1) {
+            e.preventDefault();
             shell.openExternal(url);
+        } else {
+            options.titleBarStyle = "default";
+            options.frame = true;
+            options.title = "RStudio Knit PDF Viewer";
+            options.transparent = false;
+            options.show = true;
         }
     });
 
@@ -145,12 +152,21 @@ const init = () => {
     });
 
     themeEvents.on("changed", (newMode) => {
-        console.log(`New mode is ${newMode}`);
-        // alert("Restarting to apply changes!");
-        if (mainWindow != null) {
-            mainWindow.close();
-            createWindow();
-        }
+        dialog.showMessageBox(mainWindow, {
+            "type": "question",
+            "title": "Restart to apply theme change?",
+            "buttons": ["Cancel", "Restart"],
+            "defaultId": 1,
+            "message": "RStudio Desktop needs to restart to apply the theme change. Restart now?",
+            "icon": path.join(__dirname, 'assets', 'icons', 'png', 'RStudio.png'),
+        }).then((choice) => {
+            if (choice.response == 1) {
+                if (mainWindow != null) {
+                    mainWindow.close();
+                    createWindow();
+                }
+            }
+        });
     });
 };
 
